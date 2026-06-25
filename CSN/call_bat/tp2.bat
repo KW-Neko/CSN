@@ -141,7 +141,7 @@ rem ★シャッフルされた番号のカードを5枚(IDX[0]~IDX[4])選択。
 
 
 rem ★テスト用
-rem set card[0]=S01
+set card[0]=S01
 rem set card[2]=S11
 rem set card[4]=S05
 rem 
@@ -323,6 +323,7 @@ rem ★HIT/STANDのループ開始
 		echo -----------------------------
 		
 	rem ★プレイヤーがSTANDしていない場合のみHIT/STANDの選択肢を表示
+		set HitOrStand=
 		if "%StandFlag%"=="0" (
 			set /p HitOrStand="Hit or Stand ? ( Hit : 1 / Stand : 0 ) :"
 		)
@@ -366,7 +367,7 @@ rem ★HIT/STANDのループ開始
 			
 			rem ★1のカードが1回以上出ているとき
 				if !Y_AceFlag! gtr 0 (
-					set /a Y_AceSum+=10
+					set /a Y_AceSum=!Y_CardSum!!+10
 				
 				rem ★1のカードを11とみなしたときに合計数が21を超えている場合
 					if !Y_AceSum! gtr 21 (
@@ -544,7 +545,7 @@ rem *******************************************************
 
 	rem ★勝敗判定
 		rem ★プレイヤーがバーストしている場合
-			if "!Y_BustFlag!"==1 (
+			if "!Y_BustFlag!"=="1" (
 				echo You bust.
 				echo Your rose.
 				
@@ -625,10 +626,21 @@ rem ========================================================
 	exit /b
 
 :YOUR_CARD_SUMS
-	if "%Y_AceFlag%"=="1" (
-		set /a Y_AceSum=%Y_CardSum% + 10
-		echo   Your total is %Y_CardSum% ( or !Y_AceSum! ^)
-	) else (
-		 echo   Your total is %Y_CardSum%
-	)
+	rem ★1のカードが1回以上出ているとき
+		if !Y_AceFlag! gtr 0 (
+			set /a Y_AceSum=!Y_CardSum!!+10
+			
+			rem ★1のカードを11とみなしたときに合計数が21を超えている場合
+				if !Y_AceSum! gtr 21 (
+					echo   Your total is !Y_CardSum!
+		
+			rem ★1のカードを11とみなしたときに合計数が21を超えていない場合
+				) else (
+					echo   Your total is !Y_CardSum! ( or !Y_AceSum! ^)
+				)
+		
+	rem ★1のカードが出ていないとき
+		) else (
+		 	echo   Your total is !Y_CardSum!
+		)
 	exit /b
