@@ -160,7 +160,7 @@ rem *******************************************************
 		timeout -t 1 >nul
 	
 	rem ★HiGH/LOW選択を初期化
-		set SelectHighLow=
+		set SelectHighLow=9999
 
 	rem ★選択画面
 		echo Current Card : !Card[%CurrentNum%]!
@@ -370,6 +370,7 @@ rem *******************************************************
 
 	rem ★続行
 	:CNTLOOP
+		set Continue=
 		echo ------------------------------
 		echo Current Prize : !UnsecuredPrize!
 		echo Secured Prize : !SecuredPrize!
@@ -396,30 +397,29 @@ rem *******************************************************
 
 	rem ★清算
 	:CASHOUT
+	set /a TotalBet=!PreBalance!-!Balance!
+	set /a NetProfit=!SecuredPrize!-!TotalBet!
+	set /a Balance+=!SecuredPrize!
+	
+	:CHECK_RESULT
+	set RETRY=
 	cls
 	call :TITLE_CALL
 	echo Cashing out...
 	echo ------------------------------
-	set /a TotalBet=!PreBalance!-!Balance!
 	echo Total Bet   : !TotalBet!
 	echo Final Prize : !SecuredPrize!
-	set /a NetProfit=!SecuredPrize!-!TotalBet!
 	if !NetProfit! geq 0 (
 		echo Net Profit  : +!NetProfit!
 	) else (
 		echo Net Profit  : !NetProfit!
 	)
-	set /a Balance+=!SecuredPrize!
 	echo Balance     : !Balance!
 	echo ------------------------------
-
-
-	pause
 	echo+
 	
 rem ★再PLAY用選択肢
-	:RTFLAG
-
+	
 	set /p RETRY="Do you want to retry? (y/n) : "
 		if "%RETRY%"=="y" (
 			cls

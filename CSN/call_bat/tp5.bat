@@ -197,6 +197,7 @@ rem ★残高を表示
 	
 rem ★掛け金を選択
 	set /p BetAmount="Enter your bet amount: "
+	if "%BetAmount%"=="" goto :TOP
 	if %BetAmount% gtr %Balance% (
 		echo Insufficient funds.
 		timeout -t 1 >nul
@@ -300,7 +301,7 @@ rem *******************************************************
 
 rem ★メイン画面
 	call :MAIN_CALL
-	set BET_SELECT2=
+	set BET_SELECT2=9999
 
 rem ★選択肢の出力
 echo+

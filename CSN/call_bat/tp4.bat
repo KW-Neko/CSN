@@ -88,7 +88,9 @@ rem ★タイトルコール
 	echo ------------------------------
 	
 rem ★掛け金を選択
+	set BetAmount=
 	set /p BetAmount="Enter your bet amount: "
+	if "%BetAmount%"=="" goto :TOP
 	if %BetAmount% gtr %Balance% (
 		echo Insufficient funds.
 		timeout -t 1 >nul
@@ -165,6 +167,7 @@ rem *******************************************************
 
 	rem ★ベット対象を選択
 	:SELECT_BET_SIDE
+		set SelectSide=0
 		echo Place your bet :
 		echo  1. PLAYER
 		echo  2. BANKER
