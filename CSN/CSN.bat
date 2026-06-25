@@ -75,7 +75,7 @@ rem šƒf[ƒ^ƒ[ƒh
 rem šƒƒjƒ…[‰æ–Ê
 :TOP
 	cls
-	set CHOGAME=
+	set CHOGAME=0
 	
 	rem š ƒZ[ƒuƒf[ƒ^ŒÄ‚Ño‚µ
 		for /f "tokens=1,2 delims==" %%a in (.\save\%CallData%) do (
@@ -169,7 +169,7 @@ rem šƒƒjƒ…[‰æ–Ê
 
 :HOWTO
 	cls
-	set HowToPlay=
+	set HowToPlay=9999
 	call :TITLE_CALL
 	echo [96mPlease select a game to learn how to play.[0m : 
 	echo+
