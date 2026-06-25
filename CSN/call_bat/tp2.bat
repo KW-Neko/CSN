@@ -141,7 +141,7 @@ rem ★シャッフルされた番号のカードを5枚(IDX[0]~IDX[4])選択。
 
 
 rem ★テスト用
-set card[0]=S01
+rem set card[0]=S01
 rem set card[2]=S11
 rem set card[4]=S05
 rem 
@@ -324,9 +324,11 @@ rem ★HIT/STANDのループ開始
 		
 	rem ★プレイヤーがSTANDしていない場合のみHIT/STANDの選択肢を表示
 		set HitOrStand=
-		if "%StandFlag%"=="0" (
+		if "!StandFlag!"=="0" (
 			set /p HitOrStand="Hit or Stand ? ( Hit : 1 / Stand : 0 ) :"
 		)
+
+		if "!StandFlag!"=="1" goto :DEALER_LOOP
 
 	rem ★HITの場合
 		if "%HitOrStand%"=="1" (
@@ -411,7 +413,7 @@ rem ★HIT/STANDのループ開始
 rem ********************** フェーズ5 **********************
 rem                  HIT or STAND(DEALER SIDE)
 rem *******************************************************
-
+:DEALER_LOOP
 	rem ★ディーラーサイド
 		echo ^<^<^<^<^<^<^<^<^< DEALER SIDE ^>^>^>^>^>^>^>^>^>
 		echo+
@@ -420,7 +422,7 @@ rem *******************************************************
 			if !D_CardSum! gtr 16 (
 			
 			rem ★プレイヤーもSTANDしている場合、結果画面へ
-				if "%StandFlag%"=="1" (
+				if "!StandFlag!"=="1" (
 					echo ** Dealer stands.
 					timeout -t 2 >nul
 					goto :CHECK_RESULT
@@ -438,7 +440,7 @@ rem *******************************************************
 			if !D_AceSum! gtr 16 (
 			
 			rem ★プレイヤーもSTANDしている場合、結果画面へ
-				if "%StandFlag%"=="1" (
+				if "!StandFlag!"=="1" (
 					echo ** Dealer stands.
 					timeout -t 2 >nul
 					goto :CHECK_RESULT
