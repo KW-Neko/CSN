@@ -7,8 +7,10 @@ rem ★データロード
 	rem ★呼び出しデータ/選択データを初期化
 		set CallData=
 		set SelectData=0
+		set DataLoad=0
 		
 	rem ★はじめから/つづきから
+		cls
 		echo ----------------------------------
 		echo Choose number.
 		echo 1. NEW GAME   /   2. DATA LOAD
