@@ -20,6 +20,7 @@ rem ★データロード
 		if %DataLoad% equ 1 (
 		
 		rem ★現在時刻でセーブファイルを作成・呼び出しデータとして登録
+		mkdir .\save
 			set CallData=save_%date:~,4%%date:~5,2%%date:~8,2%_%time:~,2%%time:~3,2%.dat
 			echo BALANCE=1000 > .\save\!CallData!
 	
