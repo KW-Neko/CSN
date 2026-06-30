@@ -715,7 +715,7 @@ rem 	if "!AchievementFlag[%%i]:~,-1!"=="0" (
 )
 
 echo ==============================================
-echo        š š š     ACHIEVEMENT    š š š
+echo       š š š SPECIAL ACHIEVEMENTS š š š
 echo ==============================================
 
 echo      !FLAME_T0!   !FLAME_T0!   !FLAME_T0!
