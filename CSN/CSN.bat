@@ -97,6 +97,7 @@ rem šƒƒjƒ…[‰æ–Ê
 		echo  4. BACCARAT
 		echo  5. ROULETTE
 		echo  6. HIGH/LOW
+		echo  7. CRAPS
 		echo  [2m?. How To PLAY[0m
 		echo  [2mq. Exit[0m
 		set /p CHOGAME=""
@@ -124,6 +125,10 @@ rem šƒƒjƒ…[‰æ–Ê
 	rem š[6]‚ÅHIGH/LOWŠJŽn
 		) else if %CHOGAME% equ 6 (
 			call .\call_bat\tp6.bat
+			
+	rem š[7]‚ÅCRAPSŠJŽn
+		) else if %CHOGAME% equ 7 (
+			call .\call_bat\tp7.bat
 	
 	rem š[T]‚Åtest.batŠJŽn(ƒfƒoƒbƒO—p)
 		) else if %CHOGAME% equ T (
@@ -181,6 +186,7 @@ rem šƒƒjƒ…[‰æ–Ê
 	echo  4. BACCARAT
 	echo  5. ROULETTE
 	echo  6. HIGH/LOW
+	echo  7. CRAPS
 	echo  [2m0. Back[0m
 	set /p HowToPlay=""
 	
@@ -247,6 +253,17 @@ rem šƒƒjƒ…[‰æ–Ê
 			cls
 			call :HIGHLOW_RULE_CALL1
 			call :HIGHLOW_RULE_CALL2
+			pause
+			goto :HOWTO
+			
+	rem š[7]‚ÅCRAPS
+		) else if %HowToPlay% equ 7 (
+			cls
+			call :CRAPS_RULE_CALL1
+			pause
+			cls
+			call :CRAPS_RULE_CALL1
+			call :CRAPS_RULE_CALL2
 			pause
 			goto :HOWTO
 	
@@ -542,4 +559,66 @@ echo     E4Ÿ            : x 2.5
 echo     E5ŸˆÈã        : x 3.0
 echo     ----------------------------------------------------------
 echo+
+exit /b
+
+:CRAPS_RULE_CALL1
+echo ›CRAPS
+echo+
+echo   ¥ŠT—v
+echo     2ŒÂ‚ÌƒTƒCƒRƒ‚ðU‚èAo–Ú‚â‚»‚Ì‘g‚Ý‡‚í‚¹‚ð—\‘z‚·‚éƒQ[ƒ€‚Å‚·B
+echo     ƒxƒbƒg‚ÌŽí—Þ‚É‚æ‚Á‚ÄŸ”sðŒ‚â”z“–‚ªˆÙ‚È‚è‚Ü‚·B
+echo+
+echo   ¥ƒQ[ƒ€‚Ì—¬‚ê
+echo     1. ƒxƒbƒgŽí•Ê‚ð‘I‘ð‚µ‚Ü‚·B
+echo     2. ƒxƒbƒg“à—e‚ð‘I‘ð‚µ‚Ü‚·B
+echo     3. ƒxƒbƒg“à—e‚ðŠm”FŒãAƒTƒCƒRƒ‚ðU‚è‚Ü‚·B
+echo     4. ƒxƒbƒgŽí•Ê‚É‰ž‚¶‚½Ÿ”sðŒ‚É]‚Á‚Ä”»’è‚ðs‚¢‚Ü‚·B
+echo        ƒxƒbƒg‚É‚æ‚Á‚Ä‚Í1‰ñ‚ÅŒˆ’…‚·‚é‚à‚Ì‚ÆAŸ”s‚ªŒˆ‚Ü‚é‚Ü‚ÅƒQ[ƒ€‚ª‘±s‚·‚é‚à‚Ì‚ª‚ ‚è‚Ü‚·B
+echo     5. Ÿ—˜‚µ‚½ê‡Aƒxƒbƒg“à—e‚É‰ž‚¶‚½”z“–‚ðŠl“¾‚µ‚Ü‚·B
+echo+
+echo   ¥Ÿ—˜ðŒ
+echo     ƒxƒbƒg‚µ‚½“à—e‚ªo–Ú‚ÌŒ‹‰Ê‚ÉŠY“–‚µ‚½ê‡A”z“–‚ðŠl“¾‚Å‚«‚Ü‚·B
+echo     ƒxƒbƒgŽí•Ê‚ÍˆÈ‰º‚Ì’Ê‚è‚Å‚·B
+echo+
+echo     EPass Line   : Å‰‚Ìƒ[ƒ‹‚Å7, 11‚ªo‚½ê‡‚ÍŸ—˜A2, 3, 12‚ªo‚½ê‡‚Í”s–k‚Æ‚È‚è‚Ü‚·B
+echo                     ã‹LˆÈŠO‚Ì”Žš‚ªo‚½ê‡‚ÍPoint‚Æ‚È‚èAˆÈ~‚Ìƒ[ƒ‹‚Å7‚æ‚èæ‚ÉPoint‚Æ“¯‚¶”Žš‚ªo‚é‚ÆŸ—˜‚µ‚Ü‚·B
+
+echo     EDon^'t Pass  : Å‰‚Ìƒ[ƒ‹‚Å2, 3‚ªo‚½ê‡‚ÍŸ—˜A7, 11‚ªo‚½ê‡‚Í”s–kA12‚ªo‚½ê‡‚Íˆø‚«•ª‚¯‚Æ‚È‚è‚Ü‚·B
+rem '
+echo                     ã‹LˆÈŠO‚Ì”Žš‚ªo‚½ê‡‚ÍPoint‚Æ‚È‚èAˆÈ~‚Ìƒ[ƒ‹‚ÅPoint‚æ‚èæ‚É7‚ªo‚é‚ÆŸ—˜‚µ‚Ü‚·B
+
+echo     EPlace Bet   : Žw’è‚µ‚½”Žš‚ª7‚æ‚èæ‚Éo‚é‚ÆŸ—˜‚µ‚Ü‚·B
+
+echo     EField       : ŽŸ‚Ì1‰ñ‚Ìƒ[ƒ‹‚Å‘ÎÛ‚Ì”Žš‚ªo‚é‚ÆŸ—˜‚µ‚Ü‚·B
+
+echo     EProposition : ŽŸ‚Ì1‰ñ‚Ìƒ[ƒ‹‚ÅŽw’è‚µ‚½o–Ú‚ªo‚é‚ÆŸ—˜‚µ‚Ü‚·B
+
+echo     EHard Way    : Žw’è‚µ‚½”Žš‚ðƒ]ƒ–Ú‚Åo‚·‚ÆŸ—˜‚µ‚Ü‚·B
+echo+
+exit /b
+
+
+:CRAPS_RULE_CALL2
+echo   ¥”z“–
+echo+
+echo     EŠ|‚¯‹à : 100
+echo     ----------------------------------------------------------
+echo      ƒxƒbƒgŽí•Ê             •¥–ß”{—¦
+echo     ----------------------------------------------------------
+echo     EPass Line             : x 2.0
+echo     EDon^'t Pass            : x 2.0
+rem '
+echo     EPlace 4 / 10          : x 2.8
+echo     EPlace 5 / 9           : x 2.4
+echo     EPlace 6 / 8           : x 2.2
+echo     EField                 : x 2.0
+echo     EHard 4 / 10           : x 8.0
+echo     EHard 6 / 8            : x 10.0
+echo     EAny Seven             : x 5.0
+echo     EAny Craps             : x 8.0
+echo     EYo (11)               : x 16.0
+echo     ECraps 2               : x 31.0
+echo     ECraps 3               : x 16.0
+echo     ECraps 12              : x 31.0
+echo     ----------------------------------------------------------
 exit /b
