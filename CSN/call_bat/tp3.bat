@@ -183,7 +183,7 @@ rem set SLOT1=19
 rem set SLOT2=0
 rem set SLOT3=1
 rem set SLOT4=12
-rem set SLOT5=1
+rem set SLOT5=11
 rem set SLOT6=10
 rem set SLOT7=17
 rem set SLOT8=18
@@ -264,6 +264,7 @@ rem š’†’i
 			) else if "!Reel1[%SLOT2%]!"=="[5mBAR   [0m" (
 				set /a Gain1+=100
 			) else if "!Reel1[%SLOT2%]!"=="[41;5mSEVEN [0m" (
+				set AchievementFlag[3]=1
 				set /a Gain1+=777
 			)
 		)
@@ -428,6 +429,13 @@ echo+
 
 set /a Balance+=(!TryCount!*10)+!TmpPoint!
 echo BALANCE=!Balance! > .\save\!CallData!
+echo AchievementFlag[1]=!AchievementFlag[1]!>> .\save\!CallData!
+echo AchievementFlag[2]=!AchievementFlag[2]!>> .\save\!CallData!
+echo AchievementFlag[3]=!AchievementFlag[3]!>> .\save\!CallData!
+echo AchievementFlag[4]=!AchievementFlag[4]!>> .\save\!CallData!
+echo AchievementFlag[5]=!AchievementFlag[5]!>> .\save\!CallData!
+echo AchievementFlag[6]=!AchievementFlag[6]!>> .\save\!CallData!
+echo AchievementFlag[7]=!AchievementFlag[7]!>> .\save\!CallData!
 pause
 
 exit /b

@@ -417,6 +417,9 @@ rem *******************************************************
 	echo Balance     : !Balance!
 	echo ------------------------------
 	echo+
+	if !WinStreak! geq 10 (
+		set AchievementFlag[6]=1
+	)
 	
 rem ★再PLAY用選択肢
 	
@@ -428,11 +431,9 @@ rem ★再PLAY用選択肢
 			cls
 			goto :TOP
 		) else if "%RETRY%"=="n" (
-			echo BALANCE=!Balance! > .\save\!CallData!
-			exit /b
+			goto :SAVEEXIT
 		) else if "%RETRY%"=="N" (
-			echo BALANCE=!Balance! > .\save\!CallData!
-			exit /b
+			goto :SAVEEXIT
 		) else (
 			cls
 			goto :CHECK_RESULT
@@ -440,6 +441,19 @@ rem ★再PLAY用選択肢
 
 
 exit /b
+
+
+:SAVEEXIT
+	echo BALANCE=!Balance! > .\save\!CallData!
+	echo AchievementFlag[1]=!AchievementFlag[1]!>> .\save\!CallData!
+	echo AchievementFlag[2]=!AchievementFlag[2]!>> .\save\!CallData!
+	echo AchievementFlag[3]=!AchievementFlag[3]!>> .\save\!CallData!
+	echo AchievementFlag[4]=!AchievementFlag[4]!>> .\save\!CallData!
+	echo AchievementFlag[5]=!AchievementFlag[5]!>> .\save\!CallData!
+	echo AchievementFlag[6]=!AchievementFlag[6]!>> .\save\!CallData!
+	echo AchievementFlag[7]=!AchievementFlag[7]!>> .\save\!CallData!
+	exit /b
+
 
 rem ========================================================
 rem                       関数定義部

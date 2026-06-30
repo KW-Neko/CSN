@@ -1023,6 +1023,9 @@ rem if %HitFlag% equ 1 (
 	echo Your Win.
 	set /a Payout=!BetAmount!*^(%ODDS%+1^)
 	echo PAYOUT : !Payout!
+	if !BET_SELECT1! equ 1 (
+		set AchievementFlag[5]=1
+	)
 ) else (
 	echo Your Rose.
 	set Payout=0
@@ -1042,14 +1045,24 @@ if "%RETRY%"=="y" (
 ) else if "%RETRY%"=="Y" (
 	goto :SELECT_BALANCE
 ) else if "%RETRY%"=="n" (
-	echo BALANCE=!Balance! > .\save\!CallData!
-	exit /b
+	goto :SAVEEXIT
 ) else if "%RETRY%"=="N" (
-	echo BALANCE=!Balance! > .\save\!CallData!
-	exit /b
+	goto :SAVEEXIT
 ) else (
 	goto :RETRY_LOOP
 )
+
+
+:SAVEEXIT
+	echo BALANCE=!Balance! > .\save\!CallData!
+	echo AchievementFlag[1]=!AchievementFlag[1]!>> .\save\!CallData!
+	echo AchievementFlag[2]=!AchievementFlag[2]!>> .\save\!CallData!
+	echo AchievementFlag[3]=!AchievementFlag[3]!>> .\save\!CallData!
+	echo AchievementFlag[4]=!AchievementFlag[4]!>> .\save\!CallData!
+	echo AchievementFlag[5]=!AchievementFlag[5]!>> .\save\!CallData!
+	echo AchievementFlag[6]=!AchievementFlag[6]!>> .\save\!CallData!
+	echo AchievementFlag[7]=!AchievementFlag[7]!>> .\save\!CallData!
+	exit /b
 
 
 :MAIN_CALL

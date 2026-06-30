@@ -138,6 +138,13 @@ rem ★シャッフルされた番号のカードを5枚(IDX[0]~IDX[4])選択。
 	)
 
 
+rem ★検証用(任意のカードを設定)
+rem 	set card[0]=S01
+rem 	set card[1]=S12
+rem 	set card[2]=S10
+rem 	set card[3]=S13
+rem 	set card[4]=S11
+
 rem ********************** フェーズ2 **********************
 rem                     カード入れ替え1
 rem *******************************************************
@@ -289,15 +296,6 @@ echo+
 	cls
 	call :TitleCall
 	call :CardListCall
-
-
-
-rem ★検証用(任意のカードを設定)
-rem 	set card[0]=S01
-rem 	set card[1]=S12
-rem 	set card[2]=H10
-rem 	set card[3]=S13
-rem 	set card[4]=S11
 
 
 rem ********************** フェーズ5 **********************
@@ -476,6 +474,7 @@ rem ★loyal straight Flush識別
 		if %FlushFlg% equ 1 (
 			set Hand=Loyal_Straight_Flush
 			set /a Balance+=8800
+			set AchievementFlag[1]=1
 		)
 	)
 
@@ -485,9 +484,9 @@ rem *******************************************************
 
 	:RTFLAG
 	echo+
-	echo *********************************
+	echo *******************************************
 	echo   Your Hand is "" %Hand% ""
-	echo *********************************
+	echo *******************************************
 	echo+
 	echo ------------------------------
 	echo Balance : !Balance!
@@ -504,11 +503,9 @@ rem *******************************************************
 		cls
 		goto :TOP
 	) else if "%RETRY%"=="n" (
-		echo BALANCE=!Balance! > .\save\!CallData!
-		exit /b
+		goto :SAVEEXIT
 	) else if "%RETRY%"=="N" (
-		echo BALANCE=!Balance! > .\save\!CallData!
-		exit /b
+		goto :SAVEEXIT
 	) else (
 		cls
 		call :TitleCall
@@ -516,7 +513,16 @@ rem *******************************************************
 		goto :RTFLAG
 	)
 
-
+:SAVEEXIT
+	echo BALANCE=!Balance! > .\save\!CallData!
+	echo AchievementFlag[1]=!AchievementFlag[1]!>> .\save\!CallData!
+	echo AchievementFlag[2]=!AchievementFlag[2]!>> .\save\!CallData!
+	echo AchievementFlag[3]=!AchievementFlag[3]!>> .\save\!CallData!
+	echo AchievementFlag[4]=!AchievementFlag[4]!>> .\save\!CallData!
+	echo AchievementFlag[5]=!AchievementFlag[5]!>> .\save\!CallData!
+	echo AchievementFlag[6]=!AchievementFlag[6]!>> .\save\!CallData!
+	echo AchievementFlag[7]=!AchievementFlag[7]!>> .\save\!CallData!
+	exit /b
 
 rem ========================================================
 rem                       関数定義部

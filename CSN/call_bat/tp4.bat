@@ -161,6 +161,10 @@ rem *******************************************************
 		set B_Count=!B_Count:~-1!
 
 
+	rem ★テスト用
+	rem 	set P_Count=6
+	rem 	set B_Count=6
+
 rem ********************** フェーズ3 **********************
 rem                        ベット
 rem *******************************************************
@@ -739,6 +743,7 @@ rem *******************************************************
 		rem ★引き分けにかけていた場合
 			if %WINS% equ 3 (
 				set /a Balance+=%BetAmount%*9
+				set AchievementFlag[4]=1
 		
 		rem ★プレイヤー/バンカーに賭けた場合
 			) else (
@@ -761,15 +766,23 @@ rem *******************************************************
 		) else if "%RETRY%"=="Y" (
 			goto :TOP
 		) else if "%RETRY%"=="n" (
-			echo BALANCE=!Balance! > .\save\!CallData!
-			exit /b
+			goto :SAVEEXIT
 		) else if "%RETRY%"=="N" (
-			echo BALANCE=!Balance! > .\save\!CallData!
-			exit /b
+			goto :SAVEEXIT
 		) else (
 			goto :RETRY_LOOP
 		)
 
+:SAVEEXIT
+	echo BALANCE=!Balance! > .\save\!CallData!
+	echo AchievementFlag[1]=!AchievementFlag[1]!>> .\save\!CallData!
+	echo AchievementFlag[2]=!AchievementFlag[2]!>> .\save\!CallData!
+	echo AchievementFlag[3]=!AchievementFlag[3]!>> .\save\!CallData!
+	echo AchievementFlag[4]=!AchievementFlag[4]!>> .\save\!CallData!
+	echo AchievementFlag[5]=!AchievementFlag[5]!>> .\save\!CallData!
+	echo AchievementFlag[6]=!AchievementFlag[6]!>> .\save\!CallData!
+	echo AchievementFlag[7]=!AchievementFlag[7]!>> .\save\!CallData!
+	exit /b
 
 
 rem ========================================================

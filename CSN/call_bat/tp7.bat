@@ -370,8 +370,8 @@ rem *******************************************************
 			)
 
 	rem ★テスト用
-	rem set IDX1[1]=5
-	rem set IDX2[1]=5
+	set IDX1[1]=1
+	set IDX2[1]=1
 
 
 rem ********************** フェーズ4 **********************
@@ -571,6 +571,7 @@ rem *******************************************************
 			set Payout=1600
 		) else (
 			set Payout=3100
+			set AchievementFlag[7]=1
 		)
 	) else if !BetStyle! equ 5 (
 		if !BetPlace! equ 1 (
@@ -617,11 +618,9 @@ rem ★再PLAY用選択肢
 			cls
 			goto :TOP
 		) else if "%RETRY%"=="n" (
-			echo BALANCE=!Balance! > .\save\!CallData!
-			exit /b
+			goto :SAVEEXIT
 		) else if "%RETRY%"=="N" (
-			echo BALANCE=!Balance! > .\save\!CallData!
-			exit /b
+			goto :SAVEEXIT
 		) else (
 			cls
 			goto :CHECK_RESULT
@@ -629,6 +628,19 @@ rem ★再PLAY用選択肢
 
 
 exit /b
+
+
+:SAVEEXIT
+	echo BALANCE=!Balance! > .\save\!CallData!
+	echo AchievementFlag[1]=!AchievementFlag[1]!>> .\save\!CallData!
+	echo AchievementFlag[2]=!AchievementFlag[2]!>> .\save\!CallData!
+	echo AchievementFlag[3]=!AchievementFlag[3]!>> .\save\!CallData!
+	echo AchievementFlag[4]=!AchievementFlag[4]!>> .\save\!CallData!
+	echo AchievementFlag[5]=!AchievementFlag[5]!>> .\save\!CallData!
+	echo AchievementFlag[6]=!AchievementFlag[6]!>> .\save\!CallData!
+	echo AchievementFlag[7]=!AchievementFlag[7]!>> .\save\!CallData!
+	exit /b
+
 
 rem ========================================================
 rem                       関数定義部
