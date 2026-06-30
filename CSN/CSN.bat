@@ -25,6 +25,13 @@ rem šƒf[ƒ^ƒ[ƒh
 		mkdir .\save
 			set CallData=save_%date:~,4%%date:~5,2%%date:~8,2%_%time:~,2%%time:~3,2%.dat
 			echo BALANCE=1000 > .\save\!CallData!
+			echo AchievementFlag[1]=0>> .\save\!CallData!
+			echo AchievementFlag[2]=0>> .\save\!CallData!
+			echo AchievementFlag[3]=0>> .\save\!CallData!
+			echo AchievementFlag[4]=0>> .\save\!CallData!
+			echo AchievementFlag[5]=0>> .\save\!CallData!
+			echo AchievementFlag[6]=0>> .\save\!CallData!
+			echo AchievementFlag[7]=0>> .\save\!CallData!
 	
 	rem š‚Â‚Ã‚«‚©‚ç
 		) else if %DataLoad% equ 2 (
@@ -98,6 +105,7 @@ rem šƒƒjƒ…[‰æ–Ê
 		echo  5. ROULETTE
 		echo  6. HIGH/LOW
 		echo  7. CRAPS
+		echo  [2mA. ACHIEVEMENT[0m
 		echo  [2m?. How To PLAY[0m
 		echo  [2mq. Exit[0m
 		set /p CHOGAME=""
@@ -134,6 +142,11 @@ rem šƒƒjƒ…[‰æ–Ê
 		) else if %CHOGAME% equ T (
 			call .\call_bat\test.bat
 			
+	rem š[A]‚Å—V‚Ñ•û‚ğ•\¦
+		) else if "%CHOGAME%"=="A" (
+			call :ACHIEVEMENT
+			goto :TOP
+
 	rem š[?]‚Å—V‚Ñ•û‚ğ•\¦
 		) else if "%CHOGAME%"=="?" (
 			call :HOWTO
@@ -160,7 +173,7 @@ rem šƒƒjƒ…[‰æ–Ê
 			)
 			
 		rem šI—¹
-			exit /b
+			exit
 
 		rem šI—¹cancel
 			:CANCEL
@@ -172,6 +185,8 @@ rem šƒƒjƒ…[‰æ–Ê
 		) else (
 			goto :TOP
 		)
+	
+rem štp.bat‚©‚ç–ß‚Á‚Ä‚«‚½‚Æ‚«
 	goto :TOP
 
 :HOWTO
@@ -622,3 +637,114 @@ echo     ECraps 3               : x 16.0
 echo     ECraps 12              : x 31.0
 echo     ----------------------------------------------------------
 exit /b
+
+
+:ACHIEVEMENT
+cls
+set FLAME_T0=„¡„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„¢
+set FLAME_B0=„¤„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„Ÿ„£
+
+set FLAME_D1=„        „ 
+set FLAME_D2=„        „ 
+set FLAME_D3=„        „ 
+
+set FLAME_11=„ +++AJQK„ 
+set FLAME_12=„  + + + „ 
+set FLAME_13=„ AJQK+++„ 
+
+set FLAME_21=„ X„¡„Ÿ„Ÿ„Ÿ„¢X„ 
+set FLAME_22=„ X„ A J„ X„ 
+set FLAME_23=„ X„¤„Ÿ„Ÿ„Ÿ„£X„ 
+
+set FLAME_31=„ 7777777„ 
+set FLAME_32=„   777  „ 
+set FLAME_33=„ 7777777„ 
+
+set FLAME_41=„ PPP BBB„ 
+set FLAME_42=„    X   „ 
+set FLAME_43=„ PPP BBB„ 
+
+set FLAME_51=„  \ „  / „ 
+set FLAME_52=„  „Ÿ„Ÿ›„Ÿ„Ÿ „ 
+set FLAME_53=„  / „  \ „ 
+
+set FLAME_61=„  £   ¤ „ 
+set FLAME_62=„    „    „ 
+set FLAME_63=„  ¤   £ „ 
+
+set FLAME_71=„  œ   œ „ 
+set FLAME_72=„    œ   „ 
+set FLAME_73=„  œ   œ „ 
+
+
+set ULCon[0]=????????????????????????????????
+set ULCon[1]=Royal Straight Flush‚ğ¬—§‚³‚¹‚é
+set ULCon[2]=BLACKJACK‚ÅŸ—˜‚·‚é
+set ULCon[3]=’†‰›ƒ‰ƒCƒ“‚ÅSEVEN‚ğ‘µ‚¦‚é
+set ULCon[4]=Tie‚ğ“I’†‚³‚¹‚é
+set ULCon[5]=Straight Up‚ğ“I’†‚³‚¹‚é
+set ULCon[6]=10˜AŸ‚µ‚ÄCash Out‚·‚é
+set ULCon[7]=Craps 2‚Ü‚½‚ÍCraps 12‚ğ“I’†‚³‚¹‚é
+
+set Game[1]=POKER     
+set Game[2]=BLACKJACK 
+set Game[3]=SLOT GAME 
+set Game[4]=BACCARAT  
+set Game[5]=ROULETTE  
+set Game[6]=HIGH ^& LOW
+set Game[7]=CRAPS     
+
+
+
+rem šƒeƒXƒg—p
+rem set AchievementFlag[1]=1
+rem set AchievementFlag[2]=1
+rem set AchievementFlag[3]=1
+rem set AchievementFlag[4]=1
+rem set AchievementFlag[5]=1
+rem set AchievementFlag[6]=1
+rem set AchievementFlag[7]=1
+
+for /l %%i in (1,1,7) do (
+rem 	if "!AchievementFlag[%%i]:~,-1!"=="0" (
+	if !AchievementFlag[%%i]! equ 0 (
+		set FLAME_%%i1=!FLAME_D1!
+		set FLAME_%%i2=!FLAME_D2!
+		set FLAME_%%i3=!FLAME_D3!
+	)
+)
+
+echo ==============================================
+echo        š š š     ACHIEVEMENT    š š š
+echo ==============================================
+
+echo      !FLAME_T0!   !FLAME_T0!   !FLAME_T0!
+echo      !FLAME_11!   !FLAME_21!   !FLAME_31!
+echo      !FLAME_12!   !FLAME_22!   !FLAME_32!
+echo      !FLAME_13!   !FLAME_23!   !FLAME_33!
+echo      !FLAME_B0!   !FLAME_B0!   !FLAME_B0!
+echo        POKER     BLACKJACK   SLOT GAME
+echo+
+echo !FLAME_T0!   !FLAME_T0!   !FLAME_T0!   !FLAME_T0!
+echo !FLAME_41!   !FLAME_51!   !FLAME_61!   !FLAME_71!
+echo !FLAME_42!   !FLAME_52!   !FLAME_62!   !FLAME_72!
+echo !FLAME_43!   !FLAME_53!   !FLAME_63!   !FLAME_73!
+echo !FLAME_B0!   !FLAME_B0!   !FLAME_B0!   !FLAME_B0!
+echo BACCARAT   ROULETTE     HIGH ^& LOW    CRAPS
+
+echo ==============================================
+
+echo+
+echo ’B¬ğŒ
+echo ----------------------------------------------
+for /l %%i in (1,1,7) do (
+	if !AchievementFlag[%%i]! equ 1 (
+		echo !Game[%%i]! : !ULCon[%%i]!
+	) else (
+		echo !Game[%%i]! : !ULCon[0]!
+	)
+)
+echo ----------------------------------------------
+echo+
+pause
+goto :TOP
